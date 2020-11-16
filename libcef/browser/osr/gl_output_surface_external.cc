@@ -64,7 +64,7 @@ class ExternalImageData {
     buffer_->SetColorSpace(color_space);
 
     image_id_ = gl_->CreateImageCHROMIUM(buffer_->AsClientBuffer(),
-                                         size.width(), size.height(), GL_BGRA);
+                                         size.width(), size.height(), 0x80E1 /*GL_BGRA*/);
     if (!image_id_) {
       buffer_ = 0;
       LOG(ERROR) << "could not create image chromium: " << gl_->GetError();
