@@ -32,7 +32,7 @@ class ExternalImageData {
                     const gpu::Capabilities& capabilities)
       : gl_(gl) {
     texture_target_ = gpu::GetBufferTextureTarget(
-        gfx::BufferUsage::SCANOUT, gfx::BufferFormat::RGBA_8888, capabilities);
+        gfx::BufferUsage::SCANOUT, gfx::BufferFormat::BGRA_8888, capabilities);
   }
   ~ExternalImageData() {
     if (bound_ && fbo_) {
@@ -54,7 +54,7 @@ class ExternalImageData {
               gpu::GpuMemoryBufferManager* manager) {
     size_ = size;
     color_space_ = color_space;
-    buffer_ = manager->CreateGpuMemoryBuffer(size, gfx::BufferFormat::RGBA_8888,
+    buffer_ = manager->CreateGpuMemoryBuffer(size, gfx::BufferFormat::BGRA_8888,
                                              gfx::BufferUsage::SCANOUT,
                                              gpu::kNullSurfaceHandle);
     if (!buffer_) {
@@ -64,7 +64,7 @@ class ExternalImageData {
     buffer_->SetColorSpace(color_space);
 
     image_id_ = gl_->CreateImageCHROMIUM(buffer_->AsClientBuffer(),
-                                         size.width(), size.height(), GL_RGBA);
+                                         size.width(), size.height(), GL_BGRA);
     if (!image_id_) {
       buffer_ = 0;
       LOG(ERROR) << "could not create image chromium: " << gl_->GetError();
