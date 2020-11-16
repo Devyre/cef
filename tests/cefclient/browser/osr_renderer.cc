@@ -402,7 +402,7 @@ void OsrRenderer::OnPaint(CefRefPtr<CefBrowser> browser,
       VERIFY_NO_ERROR;
       glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
       VERIFY_NO_ERROR;
-      glTexImage2D(texture_type_, 0, GL_RGBA, view_width_, view_height_, 0,
+      glTexImage2D(texture_type_, 0, GL_BGRA, view_width_, view_height_, 0,
                    GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, buffer);
       VERIFY_NO_ERROR;
     } else {
@@ -511,7 +511,7 @@ void OsrRenderer::OnAcceleratedPaint(
   VERIFY_NO_ERROR;
 
   CGLError cgl_error = CGLTexImageIOSurface2D(
-      cgl_context, texture_type_, GL_RGBA, surfw, surfh, GL_BGRA,
+      cgl_context, texture_type_, GL_BGRA, surfw, surfh, GL_BGRA,
       GL_UNSIGNED_INT_8_8_8_8_REV, last_handle_, 0);
   if (cgl_error != kCGLNoError) {
     LOG(WARNING) << "CGLTexImageIOSurface2D: " << cgl_error;
