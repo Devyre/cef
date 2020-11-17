@@ -68,7 +68,7 @@ void VerifySaveAsBitmap(CefRefPtr<CefImage> image,
   size_t expected_data_size = expected_pixel_size * expected_pixel_size * 4U;
 
   CefRefPtr<CefBinaryValue> value = image->GetAsBitmap(
-      scale_factor, CEF_COLOR_TYPE_RGBA_8888, CEF_ALPHA_TYPE_PREMULTIPLIED,
+      scale_factor, CEF_COLOR_TYPE_BGRA_8888, CEF_ALPHA_TYPE_PREMULTIPLIED,
       pixel_width, pixel_height);
   EXPECT_TRUE(value.get());
   size_t data_size = value->GetSize();
@@ -82,7 +82,7 @@ void VerifySaveAsBitmap(CefRefPtr<CefImage> image,
   CefRefPtr<CefImage> image2 = CefImage::CreateImage();
   EXPECT_TRUE(image2.get());
   EXPECT_TRUE(image2->AddBitmap(expected_scale_factor, pixel_width,
-                                pixel_height, CEF_COLOR_TYPE_RGBA_8888,
+                                pixel_height, CEF_COLOR_TYPE_BGRA_8888,
                                 CEF_ALPHA_TYPE_PREMULTIPLIED, &data[0],
                                 data_size));
   VerifyScaleExists(image2, expected_scale_factor, expected_scale_factor);
