@@ -322,8 +322,8 @@ void ExternalTextureManager::DeleteTexture(void* handle,
       eglReleaseTexImage(egl_display, surface, EGL_BACK_BUFFER);
 
       if (tex_man && texture_ref) {
-        tex_man->SetLevelInfo(texture_ref, GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 1,
-                              0, GL_RGBA, GL_UNSIGNED_BYTE, gfx::Rect());
+        tex_man->SetLevelInfo(texture_ref, GL_TEXTURE_2D, 0, 0x80E1, 0, 0, 1,
+                              0, 0x80E1, GL_UNSIGNED_BYTE, gfx::Rect());
         tex_man->SetLevelImage(texture_ref, GL_TEXTURE_2D, 0, nullptr,
                                Texture::UNBOUND);
       }
