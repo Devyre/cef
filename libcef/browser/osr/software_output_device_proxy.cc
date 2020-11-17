@@ -60,7 +60,7 @@ void SoftwareOutputDeviceProxy::Resize(const gfx::Size& viewport_pixel_size,
 
   size_t required_bytes;
   if (!ResourceSizes::MaybeSizeInBytes(
-          viewport_pixel_size_, ResourceFormat::RGBA_8888, &required_bytes)) {
+          viewport_pixel_size_, ResourceFormat::BGRA_8888, &required_bytes)) {
     DLOG(ERROR) << "Invalid viewport size " << viewport_pixel_size_.ToString();
     return;
   }
