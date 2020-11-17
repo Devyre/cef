@@ -1,0 +1,26 @@
+diff --git a/gpu/ipc/service/gpu_memory_buffer_factory_dxgi.cc b/gpu/ipc/service/gpu_memory_buffer_factory_dxgi.cc
+index d54b63479a3b..9a529ea6e1b8 100644
+--- a/gpu/ipc/service/gpu_memory_buffer_factory_dxgi.cc
++++ b/gpu/ipc/service/gpu_memory_buffer_factory_dxgi.cc
+@@ -39,6 +39,9 @@ gfx::GpuMemoryBufferHandle GpuMemoryBufferFactoryDXGI::CreateGpuMemoryBuffer(
+     case gfx::BufferFormat::RGBX_8888:
+       dxgi_format = DXGI_FORMAT_R8G8B8A8_UNORM;
+       break;
++    case gfx::BufferFormat::BGRA_8888:
++      dxgi_format = DXGI_FORMAT_B8G8R8A8_UNORM;
++      break;
+     default:
+       NOTREACHED();
+       return handle;
+diff --git a/ui/gl/gl_image_dxgi.cc b/ui/gl/gl_image_dxgi.cc
+index 5a912d2fad43..47073015aba6 100644
+--- a/ui/gl/gl_image_dxgi.cc
++++ b/ui/gl/gl_image_dxgi.cc
+@@ -32,6 +32,7 @@ bool SupportedBindFormat(gfx::BufferFormat format) {
+   switch (format) {
+     case gfx::BufferFormat::RGBA_8888:
+     case gfx::BufferFormat::RGBX_8888:
++    case gfx::BufferFormat::BGRA_8888:
+       return true;
+     default:
+       return false;
