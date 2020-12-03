@@ -26,6 +26,7 @@
 #include "include/cef_browser.h"
 #include "include/cef_client.h"
 #include "libcef_dll/ctocpp/ctocpp_ref_counted.h"
+#include "ui/events/platform_event.h"
 
 // Wrap a C structure with a C++ class.
 // This class may be instantiated and accessed wrapper-side only.
