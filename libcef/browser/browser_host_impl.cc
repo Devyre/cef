@@ -1192,7 +1192,8 @@ void CefBrowserHostImpl::SendMouseWheelEvent(const CefMouseEvent& event,
   }
 }
 
-void CefBrowserHostImpl::SendMouseWheelEventNative(const ui::PlatformEvent& event) {
+#ifdef OS_WIN
+void CefBrowserHostImpl::SendMouseWheelEventNative(const MSG& event) {
   if (!CEF_CURRENTLY_ON_UIT()) {
     CEF_POST_TASK(CEF_UIT,
                   base::BindOnce(&CefBrowserHostImpl::SendMouseWheelEventNative, this, event));
@@ -1203,6 +1204,7 @@ void CefBrowserHostImpl::SendMouseWheelEventNative(const ui::PlatformEvent& even
     platform_delegate_->SendMouseWheelEventNative(event);
   }
 }
+#endif
 
 void CefBrowserHostImpl::SendTouchEvent(const CefTouchEvent& event) {
   if (!IsWindowless()) {

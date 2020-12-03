@@ -884,9 +884,10 @@ browser_host_send_mouse_wheel_event(struct _cef_browser_host_t* self,
                                                        deltaY);
 }
 
+#ifdef OS_WIN
 void CEF_CALLBACK
 browser_host_send_mouse_wheel_event_native(struct _cef_browser_host_t* self,
-                                    const ui::PlatformEvent& event) {
+                                    const MSG& event) {
   shutdown_checker::AssertNotShutdown();
 
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
@@ -898,6 +899,7 @@ browser_host_send_mouse_wheel_event_native(struct _cef_browser_host_t* self,
   // Execute
   CefBrowserHostCppToC::Get(self)->SendMouseWheelEventNative(event);
 }
+#endif
 
 void CEF_CALLBACK
 browser_host_send_touch_event(struct _cef_browser_host_t* self,

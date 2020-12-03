@@ -29,6 +29,10 @@
 #include "libcef_dll/shutdown_checker.h"
 #include "libcef_dll/transfer_util.h"
 
+#ifdef OS_WIN
+#include <windows.h>
+#endif
+
 // STATIC METHODS - Body may be edited by hand.
 
 NO_SANITIZE("cfi-icall")
@@ -781,9 +785,10 @@ void CefBrowserHostCToCpp::SendMouseWheelEvent(const CefMouseEvent& event,
   _struct->send_mouse_wheel_event(_struct, &event, deltaX, deltaY);
 }
 
+#ifdef OS_WIN
 NO_SANITIZE("cfi-icall")
 void CefBrowserHostCToCpp::SendMouseWheelEventNative(
-    const ui::PlatformEvent& event) {
+    const MSG& event) {
   shutdown_checker::AssertNotShutdown();
 
   cef_browser_host_t* _struct = GetStruct();
@@ -795,6 +800,7 @@ void CefBrowserHostCToCpp::SendMouseWheelEventNative(
   // Execute
   _struct->send_mouse_wheel_event_native(_struct, event);
 }
+#endif
 
 NO_SANITIZE("cfi-icall")
 void CefBrowserHostCToCpp::SendTouchEvent(const CefTouchEvent& event) {

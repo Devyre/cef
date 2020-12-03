@@ -19,7 +19,10 @@
 #include "content/public/browser/render_view_host.h"
 #include "ui/events/blink/web_input_event.h"
 #include "ui/events/base_event_utils.h"
-#include "ui/events/event.h"
+
+#ifdef OS_WIN
+#include <windows.h>
+#endif
 
 CefBrowserPlatformDelegateOsr::CefBrowserPlatformDelegateOsr(
     std::unique_ptr<CefBrowserPlatformDelegateNative> native_delegate,
@@ -159,8 +162,9 @@ void CefBrowserPlatformDelegateOsr::SendMouseWheelEvent(
   view->SendMouseWheelEvent(web_event);
 }
 
+#ifdef OS_WIN
 void CefBrowserPlatformDelegateOsr::SendMouseWheelEventNative(
-    const ui::PlatformEvent& event) {
+    const MSG& event) {
   CefRenderWidgetHostViewOSR* view = GetOSRHostView();
   if (!view)
     return;
@@ -169,6 +173,7 @@ void CefBrowserPlatformDelegateOsr::SendMouseWheelEventNative(
   blink::WebMouseWheelEvent web_event = ui::MakeWebMouseWheelEvent(wheel_event);
   view->SendMouseWheelEvent(web_event);
 }
+#endif
 
 void CefBrowserPlatformDelegateOsr::SendTouchEvent(const CefTouchEvent& event) {
   CefRenderWidgetHostViewOSR* view = GetOSRHostView();

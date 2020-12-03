@@ -18,6 +18,10 @@
 #include "base/callback_forward.h"
 #include "content/public/browser/web_contents.h"
 
+#ifdef OS_WIN
+#include <windows.h>
+#endif
+
 namespace blink {
 class WebMouseEvent;
 class WebMouseWheelEvent;
@@ -198,7 +202,9 @@ class CefBrowserPlatformDelegate {
   virtual void SendMouseWheelEvent(const CefMouseEvent& event,
                                    int deltaX,
                                    int deltaY) = 0;
-  virtual void SendMouseWheelEventNative(const ui::PlatformEvent& event) {}
+#ifdef OS_WIN
+  virtual void SendMouseWheelEventNative(const MSG& event) {}
+#endif
   virtual void SendTouchEvent(const CefTouchEvent& event) = 0;
 
   // Send focus event. The browser's WebContents may be NULL when this method is

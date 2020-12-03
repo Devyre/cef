@@ -26,7 +26,10 @@
 #include "include/cef_browser.h"
 #include "include/cef_client.h"
 #include "libcef_dll/ctocpp/ctocpp_ref_counted.h"
-#include "ui/events/platform_event.h"
+
+#ifdef OS_WIN
+#include <windows.h>
+#endif
 
 // Wrap a C structure with a C++ class.
 // This class may be instantiated and accessed wrapper-side only.
@@ -104,7 +107,9 @@ class CefBrowserHostCToCpp : public CefCToCppRefCounted<CefBrowserHostCToCpp,
   void SendMouseWheelEvent(const CefMouseEvent& event,
                            int deltaX,
                            int deltaY) OVERRIDE;
-  void SendMouseWheelEventNative(const ui::PlatformEvent& event) OVERRIDE;
+#ifdef OS_WIN
+  void SendMouseWheelEventNative(const MSG& event) OVERRIDE;
+#endif
   void SendTouchEvent(const CefTouchEvent& event) OVERRIDE;
   void SendFocusEvent(bool setFocus) OVERRIDE;
   void SendCaptureLostEvent() OVERRIDE;

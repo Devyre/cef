@@ -32,6 +32,10 @@
 #include "content/public/browser/web_contents_observer.h"
 #include "extensions/common/view_type.h"
 
+#ifdef OS_WIN
+#include <windows.h>
+#endif
+
 namespace content {
 struct DragEventSourceInfo;
 class RenderWidgetHostImpl;
@@ -223,7 +227,9 @@ class CefBrowserHostImpl : public CefBrowserHost,
   void SendMouseWheelEvent(const CefMouseEvent& event,
                            int deltaX,
                            int deltaY) override;
-  void SendMouseWheelEventNative(const ui::PlatformEvent& event) override;
+#ifdef OS_WIN
+  void SendMouseWheelEventNative(const MSG& event) override;
+#endif
   void SendTouchEvent(const CefTouchEvent& event) override;
   void SendFocusEvent(bool setFocus) override;
   void SendCaptureLostEvent() override;

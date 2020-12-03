@@ -7,7 +7,10 @@
 
 #include "libcef/browser/alloy/browser_platform_delegate_alloy.h"
 #include "libcef/browser/native/browser_platform_delegate_native.h"
-#include "ui/events/platform_event.h"
+
+#ifdef OS_WIN
+#include <windows.h>
+#endif
 
 class CefRenderWidgetHostViewOSR;
 class CefWebContentsViewOSR;
@@ -42,7 +45,9 @@ class CefBrowserPlatformDelegateOsr
   void SendMouseWheelEvent(const CefMouseEvent& event,
                            int deltaX,
                            int deltaY) override;
-  void SendMouseWheelEventNative(const ui::PlatformEvent& native_event) override;
+#ifdef OS_WIN
+  void SendMouseWheelEventNative(const MSG& native_event) override;
+#endif
   void SendTouchEvent(const CefTouchEvent& event) override;
   void SendFocusEvent(bool setFocus) override;
   gfx::Point GetScreenPoint(const gfx::Point& view) const override;
