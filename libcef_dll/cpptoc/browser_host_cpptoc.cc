@@ -1402,6 +1402,7 @@ CefBrowserHostCppToC::CefBrowserHostCppToC() {
   GetStruct()->send_mouse_click_event = browser_host_send_mouse_click_event;
   GetStruct()->send_mouse_move_event = browser_host_send_mouse_move_event;
   GetStruct()->send_mouse_wheel_event = browser_host_send_mouse_wheel_event;
+  GetStruct()->send_mouse_wheel_event_native = browser_host_send_mouse_wheel_event_native;
   GetStruct()->send_touch_event = browser_host_send_touch_event;
   GetStruct()->send_focus_event = browser_host_send_focus_event;
   GetStruct()->send_capture_lost_event = browser_host_send_capture_lost_event;
