@@ -47,7 +47,7 @@
 #include "include/cef_navigation_entry.h"
 #include "include/cef_registration.h"
 #include "include/cef_request_context.h"
-#include "ui/events/platform_event.h"
+#include <windows.h>
 
 class CefBrowserHost;
 class CefClient;
@@ -702,7 +702,7 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
   virtual void SendMouseWheelEvent(const CefMouseEvent& event,
                                    int deltaX,
                                    int deltaY) = 0;
-  virtual void SendMouseWheelEventNative(const ui::PlatformEvent& event) = 0;
+  virtual void SendMouseWheelEventNative(const MSG& event) = 0;
 
   ///
   // Send a touch event to the browser for a windowless browser.
