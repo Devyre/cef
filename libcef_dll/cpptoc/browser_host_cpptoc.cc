@@ -28,6 +28,7 @@
 #include "libcef_dll/ctocpp/run_file_dialog_callback_ctocpp.h"
 #include "libcef_dll/shutdown_checker.h"
 #include "libcef_dll/transfer_util.h"
+#include "ui/events/platform_event.h"
 
 // GLOBAL FUNCTIONS - Body may be edited by hand.
 
@@ -881,6 +882,21 @@ browser_host_send_mouse_wheel_event(struct _cef_browser_host_t* self,
   // Execute
   CefBrowserHostCppToC::Get(self)->SendMouseWheelEvent(eventObj, deltaX,
                                                        deltaY);
+}
+
+void CEF_CALLBACK
+browser_host_send_mouse_wheel_event_native(struct _cef_browser_host_t* self,
+                                    const ui::PlatformEvent& event) {
+  shutdown_checker::AssertNotShutdown();
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  DCHECK(self);
+  if (!self)
+    return;
+
+  // Execute
+  CefBrowserHostCppToC::Get(self)->SendMouseWheelEventNative(event);
 }
 
 void CEF_CALLBACK

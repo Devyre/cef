@@ -782,6 +782,21 @@ void CefBrowserHostCToCpp::SendMouseWheelEvent(const CefMouseEvent& event,
 }
 
 NO_SANITIZE("cfi-icall")
+void CefBrowserHostCToCpp::SendMouseWheelEventNative(
+    const ui::PlatformEvent& event) {
+  shutdown_checker::AssertNotShutdown();
+
+  cef_browser_host_t* _struct = GetStruct();
+  if (CEF_MEMBER_MISSING(_struct, send_mouse_wheel_event_native))
+    return;
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Execute
+  _struct->send_mouse_wheel_event_native(_struct, event);
+}
+
+NO_SANITIZE("cfi-icall")
 void CefBrowserHostCToCpp::SendTouchEvent(const CefTouchEvent& event) {
   shutdown_checker::AssertNotShutdown();
 

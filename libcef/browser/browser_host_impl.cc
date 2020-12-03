@@ -1192,6 +1192,18 @@ void CefBrowserHostImpl::SendMouseWheelEvent(const CefMouseEvent& event,
   }
 }
 
+void CefBrowserHostImpl::SendMouseWheelEventNative(const ui::PlatformEvent& event) {
+  if (!CEF_CURRENTLY_ON_UIT()) {
+    CEF_POST_TASK(CEF_UIT,
+                  base::BindOnce(&CefBrowserHostImpl::SendMouseWheelEventNative, this, event));
+    return;
+  }
+
+  if (platform_delegate_) {
+    platform_delegate_->SendMouseWheelEventNative(event);
+  }
+}
+
 void CefBrowserHostImpl::SendTouchEvent(const CefTouchEvent& event) {
   if (!IsWindowless()) {
     NOTREACHED() << "Window rendering is not disabled";

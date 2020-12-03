@@ -103,6 +103,7 @@ class CefBrowserHostCToCpp : public CefCToCppRefCounted<CefBrowserHostCToCpp,
   void SendMouseWheelEvent(const CefMouseEvent& event,
                            int deltaX,
                            int deltaY) OVERRIDE;
+  void SendMouseWheelEventNative(const ui::PlatformEvent& event) OVERRIDE;
   void SendTouchEvent(const CefTouchEvent& event) OVERRIDE;
   void SendFocusEvent(bool setFocus) OVERRIDE;
   void SendCaptureLostEvent() OVERRIDE;

@@ -48,6 +48,7 @@
 #include "include/capi/cef_navigation_entry_capi.h"
 #include "include/capi/cef_registration_capi.h"
 #include "include/capi/cef_request_context_capi.h"
+#include "ui/events/platform_event.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -673,6 +674,9 @@ typedef struct _cef_browser_host_t {
       const struct _cef_mouse_event_t* event,
       int deltaX,
       int deltaY);
+  void(CEF_CALLBACK* send_mouse_wheel_event_native)(
+      struct _cef_browser_host_t* self,
+      const ui::PlatformEvent& event);
 
   ///
   // Send a touch event to the browser for a windowless browser.
