@@ -10,7 +10,7 @@ namespace {
 
 // The rate at which new calls to OnPaint will be generated.
 const int kDefaultFrameRate = 30;
-const int kMaximumFrameRate = 60;
+const int kMaximumFrameRate = 2147483647;
 
 }  // namespace
 
