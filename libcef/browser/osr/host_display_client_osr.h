@@ -14,15 +14,13 @@
 
 class CefLayeredWindowUpdaterOSR;
 class CefRenderWidgetHostViewOSR;
+class CefExternalRendererUpdaterOSR;
 
 class CefHostDisplayClientOSR : public viz::HostDisplayClient {
  public:
   CefHostDisplayClientOSR(CefRenderWidgetHostViewOSR* const view,
-                          gfx::AcceleratedWidget widget);
-
-  CefHostDisplayClientOSR(const CefHostDisplayClientOSR&) = delete;
-  CefHostDisplayClientOSR& operator=(const CefHostDisplayClientOSR&) = delete;
-
+                          gfx::AcceleratedWidget widget,
+                          bool use_proxy_output);
   ~CefHostDisplayClientOSR() override;
 
   void SetActive(bool active);
@@ -36,6 +34,9 @@ class CefHostDisplayClientOSR : public viz::HostDisplayClient {
   void CreateLayeredWindowUpdater(
       mojo::PendingReceiver<viz::mojom::LayeredWindowUpdater> receiver)
       override;
+  void CreateExternalRendererUpdater(
+      mojo::PendingReceiver<viz::mojom::ExternalRendererUpdater> receiver)
+      override;
 
 #if BUILDFLAG(IS_LINUX)
   void DidCompleteSwapWithNewSize(const gfx::Size& size) override;
@@ -43,7 +44,9 @@ class CefHostDisplayClientOSR : public viz::HostDisplayClient {
 
   CefRenderWidgetHostViewOSR* const view_;
   std::unique_ptr<CefLayeredWindowUpdaterOSR> layered_window_updater_;
+  std::unique_ptr<CefExternalRendererUpdaterOSR> external_renderer_updater_;
   bool active_ = false;
+  bool use_proxy_output_ = true;
 };
 
 #endif  // CEF_LIBCEF_BROWSER_OSR_HOST_DISPLAY_CLIENT_OSR_H_
