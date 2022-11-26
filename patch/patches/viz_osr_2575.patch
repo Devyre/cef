@@ -136,7 +136,7 @@ index 40db30f..c515084 100644
  }
  
 diff --git components/viz/service/display_embedder/output_surface_provider_impl.cc components/viz/service/display_embedder/output_surface_provider_impl.cc
-index 8a277c6..5b5de3b 100644
+index 8a277c6..ca61f35 100644
 --- components/viz/service/display_embedder/output_surface_provider_impl.cc
 +++ components/viz/service/display_embedder/output_surface_provider_impl.cc
 @@ -17,6 +17,8 @@
@@ -148,7 +148,15 @@ index 8a277c6..5b5de3b 100644
  #include "components/viz/common/display/renderer_settings.h"
  #include "components/viz/common/frame_sinks/begin_frame_source.h"
  #include "components/viz/service/display/display_compositor_memory_and_task_controller.h"
-@@ -209,8 +211,19 @@ std::unique_ptr<OutputSurface> OutputSurfaceProviderImpl::CreateOutputSurface(
+@@ -39,6 +41,7 @@
+ #include "gpu/ipc/scheduler_sequence.h"
+ #include "gpu/ipc/service/gpu_channel_manager_delegate.h"
+ #include "gpu/ipc/service/image_transport_surface.h"
++#include "mojo/public/cpp/bindings/sync_call_restrictions.h"
+ #include "ui/base/ui_base_switches.h"
+ #include "ui/gl/gl_context.h"
+ #include "ui/gl/init/gl_factory.h"
+@@ -209,8 +212,19 @@ std::unique_ptr<OutputSurface> OutputSurfaceProviderImpl::CreateOutputSurface(
      }
  
      if (surface_handle == gpu::kNullSurfaceHandle) {
@@ -170,7 +178,7 @@ index 8a277c6..5b5de3b 100644
      } else if (context_provider->ContextCapabilities().surfaceless) {
  #if defined(USE_OZONE) || BUILDFLAG(IS_APPLE) || BUILDFLAG(IS_ANDROID)
        output_surface = std::make_unique<GLOutputSurfaceBufferQueue>(
-@@ -247,6 +260,20 @@ OutputSurfaceProviderImpl::CreateSoftwareOutputDeviceForPlatform(
+@@ -247,6 +261,20 @@ OutputSurfaceProviderImpl::CreateSoftwareOutputDeviceForPlatform(
    if (headless_)
      return std::make_unique<SoftwareOutputDevice>();
  
@@ -367,3 +375,4 @@ index 15c1166..d7c6ded 100644
  
    if (hrWait == WAIT_TIMEOUT || hrWait == WAIT_ABANDONED || FAILED(hrWait)) {
      NOTREACHED();
+	 
