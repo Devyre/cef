@@ -47,6 +47,9 @@
 #include "include/cef_navigation_entry.h"
 #include "include/cef_registration.h"
 #include "include/cef_request_context.h"
+#include "include/cef_ui_platform_types.h"
+
+// ui_platform_types
 
 class CefBrowserHost;
 class CefClient;
@@ -665,6 +668,13 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
   virtual void SendKeyEvent(const CefKeyEvent& event) = 0;
 
   ///
+  // Send a native key event to the browser.
+  // Implemented by Devyre.
+  ///
+  /*--cef()--*/
+  virtual void SendKeyEvent(const ui::PlatformEvent& event) = 0;
+
+  ///
   // Send a mouse click event to the browser. The |x| and |y| coordinates are
   // relative to the upper-left corner of the view.
   ///
@@ -675,12 +685,26 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
                                    int clickCount) = 0;
 
   ///
+  // Send a native mouse click event to the browser.
+  // Implemented by Devyre.
+  ///
+  /*--cef()--*/
+  virtual void SendMouseClickEvent(const ui::PlatformEvent& event) = 0;
+
+  ///
   // Send a mouse move event to the browser. The |x| and |y| coordinates are
   // relative to the upper-left corner of the view.
   ///
   /*--cef()--*/
   virtual void SendMouseMoveEvent(const CefMouseEvent& event,
                                   bool mouseLeave) = 0;
+
+  ///
+  // Send a native mouse move event to the browser.
+  // Implemented by Devyre.
+  ///
+  /*--cef()--*/
+  virtual void SendMouseMoveEvent(const ui::PlatformEvent& event) = 0;
 
   ///
   // Send a mouse wheel event to the browser. The |x| and |y| coordinates are
@@ -693,6 +717,13 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
   virtual void SendMouseWheelEvent(const CefMouseEvent& event,
                                    int deltaX,
                                    int deltaY) = 0;
+
+  ///
+  // Send a native mouse wheel event to the browser. Ensures smooth scrolling.
+  // Implemented by Devyre.
+  ///
+  /*--cef()--*/
+  virtual void SendMouseWheelEvent(const ui::PlatformEvent& event) = 0;
 
   ///
   // Send a touch event to the browser for a windowless browser.

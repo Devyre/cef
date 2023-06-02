@@ -32,16 +32,26 @@ class CefBrowserPlatformDelegateOsr
   void BrowserDestroyed(CefBrowserHostBase* browser) override;
   SkColor GetBackgroundColor() const override;
   void WasResized() override;
+
   void SendKeyEvent(const CefKeyEvent& event) override;
+  void SendKeyEvent(const ui::PlatformEvent& event) override;
+
   void SendMouseClickEvent(const CefMouseEvent& event,
                            CefBrowserHost::MouseButtonType type,
                            bool mouseUp,
                            int clickCount) override;
+  void SendMouseClickEvent(const ui::PlatformEvent& event) override;
+
   void SendMouseMoveEvent(const CefMouseEvent& event, bool mouseLeave) override;
+  void SendMouseMoveEvent(const ui::PlatformEvent& event) override;
+
   void SendMouseWheelEvent(const CefMouseEvent& event,
                            int deltaX,
                            int deltaY) override;
+  void SendMouseWheelEvent(const ui::PlatformEvent& event) override;
+
   void SendTouchEvent(const CefTouchEvent& event) override;
+
   void SetFocus(bool setFocus) override;
   gfx::Point GetScreenPoint(const gfx::Point& view,
                             bool want_dip_coords) const override;

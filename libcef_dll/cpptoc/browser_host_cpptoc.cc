@@ -789,6 +789,21 @@ browser_host_send_key_event(struct _cef_browser_host_t* self,
 }
 
 void CEF_CALLBACK
+browser_host_send_key_event_native(struct _cef_browser_host_t* self,
+                                   const ui::PlatformEvent& event) {
+  shutdown_checker::AssertNotShutdown();
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  DCHECK(self);
+  if (!self)
+    return;
+  
+  // Execute
+  CefBrowserHostCppToC::Get(self)->SendKeyEvent(event);
+}
+
+void CEF_CALLBACK
 browser_host_send_mouse_click_event(struct _cef_browser_host_t* self,
                                     const struct _cef_mouse_event_t* event,
                                     cef_mouse_button_type_t type,
@@ -818,6 +833,21 @@ browser_host_send_mouse_click_event(struct _cef_browser_host_t* self,
   // Execute
   CefBrowserHostCppToC::Get(self)->SendMouseClickEvent(
       eventObj, type, mouseUp ? true : false, clickCount);
+}
+
+void CEF_CALLBACK
+browser_host_send_mouse_click_event_native(struct _cef_browser_host_t* self,
+                                    const ui::PlatformEvent& event) {
+  shutdown_checker::AssertNotShutdown();
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  DCHECK(self);
+  if (!self)
+    return;
+
+  // Execute
+  CefBrowserHostCppToC::Get(self)->SendMouseClickEvent(event);
 }
 
 void CEF_CALLBACK
@@ -851,6 +881,21 @@ browser_host_send_mouse_move_event(struct _cef_browser_host_t* self,
 }
 
 void CEF_CALLBACK
+browser_host_send_mouse_move_event_native(struct _cef_browser_host_t* self,
+                                   const ui::PlatformEvent& event) {
+  shutdown_checker::AssertNotShutdown();
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  DCHECK(self);
+  if (!self)
+    return;
+  
+  // Execute
+  CefBrowserHostCppToC::Get(self)->SendMouseMoveEvent(event);
+}
+
+void CEF_CALLBACK
 browser_host_send_mouse_wheel_event(struct _cef_browser_host_t* self,
                                     const struct _cef_mouse_event_t* event,
                                     int deltaX,
@@ -879,6 +924,21 @@ browser_host_send_mouse_wheel_event(struct _cef_browser_host_t* self,
   // Execute
   CefBrowserHostCppToC::Get(self)->SendMouseWheelEvent(eventObj, deltaX,
                                                        deltaY);
+}
+
+void CEF_CALLBACK
+browser_host_send_mouse_wheel_event_native(struct _cef_browser_host_t* self,
+                                    const ui::PlatformEvent& event) {
+  shutdown_checker::AssertNotShutdown();
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  DCHECK(self);
+  if (!self)
+    return;
+  
+  // Execute
+  CefBrowserHostCppToC::Get(self)->SendMouseWheelEvent(event);
 }
 
 void CEF_CALLBACK
@@ -1379,9 +1439,13 @@ CefBrowserHostCppToC::CefBrowserHostCppToC() {
   GetStruct()->send_external_begin_frame =
       browser_host_send_external_begin_frame;
   GetStruct()->send_key_event = browser_host_send_key_event;
+  GetStruct()->send_key_event_native = browser_host_send_key_event_native;
   GetStruct()->send_mouse_click_event = browser_host_send_mouse_click_event;
+  GetStruct()->send_mouse_click_event_native = browser_host_send_mouse_click_event_native;
   GetStruct()->send_mouse_move_event = browser_host_send_mouse_move_event;
+  GetStruct()->send_mouse_move_event_native = browser_host_send_mouse_move_event_native;
   GetStruct()->send_mouse_wheel_event = browser_host_send_mouse_wheel_event;
+  GetStruct()->send_mouse_wheel_event_native = browser_host_send_mouse_wheel_event_native;
   GetStruct()->send_touch_event = browser_host_send_touch_event;
   GetStruct()->send_capture_lost_event = browser_host_send_capture_lost_event;
   GetStruct()->notify_move_or_resize_started =

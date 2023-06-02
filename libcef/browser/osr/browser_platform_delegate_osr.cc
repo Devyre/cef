@@ -118,6 +118,17 @@ void CefBrowserPlatformDelegateOsr::SendKeyEvent(const CefKeyEvent& event) {
   view->SendKeyEvent(web_event);
 }
 
+void CefBrowserPlatformDelegateOsr::SendKeyEvent(
+    const ui::PlatformEvent& event) {
+  CefRenderWidgetHostViewOSR* view = GetOSRHostView();
+  if (!view)
+    return;
+
+  ui::KeyEvent e(event);
+  content::NativeWebKeyboardEvent web_event(e);
+  view->SendKeyEvent(web_event);
+}
+
 void CefBrowserPlatformDelegateOsr::SendMouseClickEvent(
     const CefMouseEvent& event,
     CefBrowserHost::MouseButtonType type,
@@ -132,6 +143,17 @@ void CefBrowserPlatformDelegateOsr::SendMouseClickEvent(
   view->SendMouseEvent(web_event);
 }
 
+void CefBrowserPlatformDelegateOsr::SendMouseClickEvent(
+    const ui::PlatformEvent& event) {
+  CefRenderWidgetHostViewOSR* view = GetOSRHostView();
+  if (!view)
+    return;
+
+  ui::MouseEvent e(event);
+  blink::WebMouseEvent web_event = ui::MakeWebMouseEvent(e);
+  view->SendMouseEvent(web_event);
+}
+
 void CefBrowserPlatformDelegateOsr::SendMouseMoveEvent(
     const CefMouseEvent& event,
     bool mouseLeave) {
@@ -141,6 +163,17 @@ void CefBrowserPlatformDelegateOsr::SendMouseMoveEvent(
 
   blink::WebMouseEvent web_event =
       native_delegate_->TranslateWebMoveEvent(event, mouseLeave);
+  view->SendMouseEvent(web_event);
+}
+
+void CefBrowserPlatformDelegateOsr::SendMouseMoveEvent(
+    const ui::PlatformEvent& event) {
+  CefRenderWidgetHostViewOSR* view = GetOSRHostView();
+  if (!view)
+    return;
+
+  ui::MouseEvent e(event);
+  blink::WebMouseEvent web_event = ui::MakeWebMouseEvent(e);
   view->SendMouseEvent(web_event);
 }
 
@@ -157,10 +190,23 @@ void CefBrowserPlatformDelegateOsr::SendMouseWheelEvent(
   view->SendMouseWheelEvent(web_event);
 }
 
+void CefBrowserPlatformDelegateOsr::SendMouseWheelEvent(
+    const ui::PlatformEvent& event) {
+  CefRenderWidgetHostViewOSR* view = GetOSRHostView();
+  if (!view)
+    return;
+
+  ui::MouseWheelEvent e(event);
+  blink::WebMouseWheelEvent web_event = ui::MakeWebMouseWheelEvent(e);
+  view->SendMouseWheelEvent(web_event);
+}
+
 void CefBrowserPlatformDelegateOsr::SendTouchEvent(const CefTouchEvent& event) {
   CefRenderWidgetHostViewOSR* view = GetOSRHostView();
-  if (view)
-    view->SendTouchEvent(event);
+  if (!view)
+    return;
+
+  view->SendTouchEvent(event);
 }
 
 void CefBrowserPlatformDelegateOsr::SetFocus(bool setFocus) {

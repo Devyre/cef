@@ -48,6 +48,7 @@
 #include "include/capi/cef_navigation_entry_capi.h"
 #include "include/capi/cef_registration_capi.h"
 #include "include/capi/cef_request_context_capi.h"
+#include "include/cef_ui_platform_types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -635,6 +636,13 @@ typedef struct _cef_browser_host_t {
                                      const struct _cef_key_event_t* event);
 
   ///
+  // Send a native key event to the browser.
+  // Implemented by Devyre.
+  ///
+  void(CEF_CALLBACK* send_key_event_native)(struct _cef_browser_host_t* self,
+                                     const ui::PlatformEvent& event);
+
+  ///
   // Send a mouse click event to the browser. The |x| and |y| coordinates are
   // relative to the upper-left corner of the view.
   ///
@@ -646,6 +654,15 @@ typedef struct _cef_browser_host_t {
       int clickCount);
 
   ///
+  // Send a native mouse click event to the browser. The |x| and |y| coordinates are
+  // relative to the upper-left corner of the view.
+  // Implemented by Devyre.
+  ///
+  void(CEF_CALLBACK* send_mouse_click_event_native)(
+      struct _cef_browser_host_t* self,
+      const ui::PlatformEvent& event);
+
+  ///
   // Send a mouse move event to the browser. The |x| and |y| coordinates are
   // relative to the upper-left corner of the view.
   ///
@@ -653,6 +670,15 @@ typedef struct _cef_browser_host_t {
       struct _cef_browser_host_t* self,
       const struct _cef_mouse_event_t* event,
       int mouseLeave);
+
+  ///
+  // Send a native mouse move event to the browser. The |x| and |y| coordinates are
+  // relative to the upper-left corner of the view.
+  // Implemented by Devyre.
+  ///
+  void(CEF_CALLBACK* send_mouse_move_event_native)(
+      struct _cef_browser_host_t* self,
+      const ui::PlatformEvent& event);
 
   ///
   // Send a mouse wheel event to the browser. The |x| and |y| coordinates are
@@ -666,6 +692,17 @@ typedef struct _cef_browser_host_t {
       const struct _cef_mouse_event_t* event,
       int deltaX,
       int deltaY);
+
+  ///
+  // Send a native mouse wheel event to the browser. The |x| and |y| coordinates are
+  // relative to the upper-left corner of the view. The |deltaX| and |deltaY|
+  // values represent the movement delta in the X and Y directions respectively.
+  // In order to scroll inside select popups with window rendering disabled
+  // cef_render_handler_t::GetScreenPoint should be implemented properly.
+  ///
+  void(CEF_CALLBACK* send_mouse_wheel_event_native)(
+      struct _cef_browser_host_t* self,
+      const ui::PlatformEvent& event);
 
   ///
   // Send a touch event to the browser for a windowless browser.

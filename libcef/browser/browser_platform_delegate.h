@@ -21,6 +21,8 @@
 #include "third_party/skia/include/core/SkColor.h"
 #include "ui/base/dragdrop/mojom/drag_drop_types.mojom-forward.h"
 #include "ui/base/window_open_disposition.h"
+#include "ui/events/blink/web_input_event.h"
+#include "ui/events/event.h"
 
 class GURL;
 
@@ -212,14 +214,23 @@ class CefBrowserPlatformDelegate {
 
   // Send input events.
   virtual void SendKeyEvent(const CefKeyEvent& event);
+  virtual void SendKeyEvent(const ui::PlatformEvent& event);
+
   virtual void SendMouseClickEvent(const CefMouseEvent& event,
                                    CefBrowserHost::MouseButtonType type,
                                    bool mouseUp,
                                    int clickCount);
+
+  virtual void SendMouseClickEvent(const ui::PlatformEvent& event);
+
   virtual void SendMouseMoveEvent(const CefMouseEvent& event, bool mouseLeave);
+  virtual void SendMouseMoveEvent(const ui::PlatformEvent& event);
+
   virtual void SendMouseWheelEvent(const CefMouseEvent& event,
                                    int deltaX,
                                    int deltaY);
+  virtual void SendMouseWheelEvent(const ui::PlatformEvent& event);
+
   virtual void SendTouchEvent(const CefTouchEvent& event);
 
   // Send focus event. The browser's WebContents may be NULL when this method is

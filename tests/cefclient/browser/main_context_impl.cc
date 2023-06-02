@@ -83,7 +83,7 @@ MainContextImpl::MainContextImpl(CefRefPtr<CefCommandLine> command_line,
   if (windowless_frame_rate_ <= 0) {
 // Choose a reasonable default rate based on the OSR mode.
 #if defined(OS_WIN)
-    windowless_frame_rate_ = shared_texture_enabled_ ? 60 : 30;
+    windowless_frame_rate_ = shared_texture_enabled_ ? 240 : 30;
 #else
     windowless_frame_rate_ = 30;
 #endif
