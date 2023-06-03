@@ -323,14 +323,15 @@ class PopupTestHandler : public TestHandler {
       mouse_event.modifiers = 0;
 
       // Add some delay to avoid having events dropped or rate limited.
+    using TFunction = void(CefBrowserHost::*)(const CefMouseEvent&, CefBrowserHost::MouseButtonType type, bool mouseUp, int clickCount);
       CefPostDelayedTask(
           TID_UI,
-          base::BindOnce(&CefBrowserHost::SendMouseClickEvent,
+          base::BindOnce(TFunction(&CefBrowserHost::SendMouseClickEvent),
                          browser->GetHost(), mouse_event, MBT_LEFT, false, 1),
           50);
       CefPostDelayedTask(
           TID_UI,
-          base::BindOnce(&CefBrowserHost::SendMouseClickEvent,
+          base::BindOnce(TFunction(&CefBrowserHost::SendMouseClickEvent),
                          browser->GetHost(), mouse_event, MBT_LEFT, true, 1),
           100);
     } else {
