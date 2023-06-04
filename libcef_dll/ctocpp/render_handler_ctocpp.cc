@@ -225,8 +225,7 @@ NO_SANITIZE("cfi-icall")
 void CefRenderHandlerCToCpp::OnAcceleratedPaint(CefRefPtr<CefBrowser> browser,
                                                 PaintElementType type,
                                                 const RectList& dirtyRects,
-                                                void* shared_handle,
-                                                bool surface_was_updated) {
+                                                void* shared_handle) {
   shutdown_checker::AssertNotShutdown();
 
   cef_render_handler_t* _struct = GetStruct();
@@ -240,9 +239,9 @@ void CefRenderHandlerCToCpp::OnAcceleratedPaint(CefRefPtr<CefBrowser> browser,
   if (!browser.get())
     return;
   // Verify param: shared_handle; type: simple_byaddr
-  // DCHECK(shared_handle);
-  // if (!shared_handle)
-  //  return;
+  DCHECK(shared_handle);
+  if (!shared_handle)
+    return;
 
   // Translate param: dirtyRects; type: simple_vec_byref_const
   const size_t dirtyRectsCount = dirtyRects.size();
@@ -259,8 +258,7 @@ void CefRenderHandlerCToCpp::OnAcceleratedPaint(CefRefPtr<CefBrowser> browser,
 
   // Execute
   _struct->on_accelerated_paint(_struct, CefBrowserCppToC::Wrap(browser), type,
-                                dirtyRectsCount, dirtyRectsList, shared_handle,
-                                surface_was_updated);
+                                dirtyRectsCount, dirtyRectsList, shared_handle);
 
   // Restore param:dirtyRects; type: simple_vec_byref_const
   if (dirtyRectsList)

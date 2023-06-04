@@ -294,8 +294,7 @@ render_handler_on_accelerated_paint(struct _cef_render_handler_t* self,
                                     cef_paint_element_type_t type,
                                     size_t dirtyRectsCount,
                                     cef_rect_t const* dirtyRects,
-                                    void* shared_handle,
-									bool surface_was_updated) {
+                                    void* shared_handle) {
   shutdown_checker::AssertNotShutdown();
 
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
@@ -312,9 +311,9 @@ render_handler_on_accelerated_paint(struct _cef_render_handler_t* self,
   if (dirtyRectsCount > 0 && !dirtyRects)
     return;
   // Verify param: shared_handle; type: simple_byaddr
-  //DCHECK(shared_handle);
-  //if (!shared_handle)
-  //  return;
+  DCHECK(shared_handle);
+  if (!shared_handle)
+    return;
 
   // Translate param: dirtyRects; type: simple_vec_byref_const
   std::vector<CefRect> dirtyRectsList;
@@ -327,7 +326,7 @@ render_handler_on_accelerated_paint(struct _cef_render_handler_t* self,
 
   // Execute
   CefRenderHandlerCppToC::Get(self)->OnAcceleratedPaint(
-      CefBrowserCToCpp::Wrap(browser), type, dirtyRectsList, shared_handle, surface_was_updated);
+      CefBrowserCToCpp::Wrap(browser), type, dirtyRectsList, shared_handle);
 }
 
 int CEF_CALLBACK

@@ -177,16 +177,13 @@ void OsrRenderHandlerWinD3D11::OnAcceleratedPaint(
     CefRefPtr<CefBrowser> browser,
     CefRenderHandler::PaintElementType type,
     const CefRenderHandler::RectList& dirtyRects,
-    void* share_handle,
-    bool surface_was_updated) {
+    void* share_handle) {
   CEF_REQUIRE_UI_THREAD();
 
-  if (surface_was_updated) {
-    if (type == PET_POPUP) {
-      popup_layer_->on_paint(share_handle);
-    } else {
-      browser_layer_->on_paint(share_handle);
-    }
+  if (type == PET_POPUP) {
+    popup_layer_->on_paint(share_handle);
+  } else {
+    browser_layer_->on_paint(share_handle);
   }
 
   Render();

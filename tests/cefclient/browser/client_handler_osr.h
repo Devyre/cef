@@ -48,8 +48,7 @@ class ClientHandlerOsr : public ClientHandler,
         CefRefPtr<CefBrowser> browser,
         CefRenderHandler::PaintElementType type,
         const CefRenderHandler::RectList& dirtyRects,
-        void* share_handle,
-        bool surface_was_updated) {}
+        void* share_handle) {}
     virtual bool StartDragging(CefRefPtr<CefBrowser> browser,
                                CefRefPtr<CefDragData> drag_data,
                                CefRenderHandler::DragOperationsMask allowed_ops,
@@ -116,8 +115,7 @@ class ClientHandlerOsr : public ClientHandler,
   void OnAcceleratedPaint(CefRefPtr<CefBrowser> browser,
                           CefRenderHandler::PaintElementType type,
                           const CefRenderHandler::RectList& dirtyRects,
-                          void* share_handle,
-                          bool surface_was_updated) override;
+                          void* share_handle) override;
   bool StartDragging(CefRefPtr<CefBrowser> browser,
                      CefRefPtr<CefDragData> drag_data,
                      CefRenderHandler::DragOperationsMask allowed_ops,

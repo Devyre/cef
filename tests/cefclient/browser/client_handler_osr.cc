@@ -114,12 +114,11 @@ void ClientHandlerOsr::OnAcceleratedPaint(
     CefRefPtr<CefBrowser> browser,
     CefRenderHandler::PaintElementType type,
     const CefRenderHandler::RectList& dirtyRects,
-    void* share_handle,
-    bool surface_was_updated) {
+    void* share_handle) {
   CEF_REQUIRE_UI_THREAD();
   if (!osr_delegate_)
     return;
-  osr_delegate_->OnAcceleratedPaint(browser, type, dirtyRects, share_handle, surface_was_updated);
+  osr_delegate_->OnAcceleratedPaint(browser, type, dirtyRects, share_handle);
 }
 
 bool ClientHandlerOsr::StartDragging(

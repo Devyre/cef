@@ -136,8 +136,7 @@ void OsrRenderHandlerWinGL::OnAcceleratedPaint(
     CefRefPtr<CefBrowser> browser,
     CefRenderHandler::PaintElementType type,
     const CefRenderHandler::RectList& dirtyRects,
-    void* share_handle,
-    bool surface_was_updated) {
+    void* share_handle) {
   // Not used with this implementation.
   NOTREACHED();
 }

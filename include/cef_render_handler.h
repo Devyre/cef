@@ -180,8 +180,7 @@ class CefRenderHandler : public virtual CefBaseRefCounted {
   virtual void OnAcceleratedPaint(CefRefPtr<CefBrowser> browser,
                                   PaintElementType type,
                                   const RectList& dirtyRects,
-                                  void* shared_handle,
-                                  bool surface_was_updated) {}
+                                  void* shared_handle) {}
 
   ///
   // Called when the user starts dragging content in the web view. Contextual

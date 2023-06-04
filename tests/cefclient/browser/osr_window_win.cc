@@ -1105,10 +1105,9 @@ void OsrWindowWin::OnAcceleratedPaint(
     CefRefPtr<CefBrowser> browser,
     CefRenderHandler::PaintElementType type,
     const CefRenderHandler::RectList& dirtyRects,
-    void* share_handle,
-    bool surface_was_updated) {
+    void* share_handle) {
   EnsureRenderHandler();
-  render_handler_->OnAcceleratedPaint(browser, type, dirtyRects, share_handle, surface_was_updated);
+  render_handler_->OnAcceleratedPaint(browser, type, dirtyRects, share_handle);
 }
 
 void OsrWindowWin::OnCursorChange(CefRefPtr<CefBrowser> browser,

@@ -39,8 +39,7 @@ class OsrRenderer {
   void OnAcceleratedPaint(CefRefPtr<CefBrowser> browser,
                           CefRenderHandler::PaintElementType type,
                           const CefRenderHandler::RectList& dirtyRects,
-                          void* shared_handle,
-                          bool surface_was_updated);
+                          void* shared_handle);
 
   // Apply spin.
   void SetSpin(float spinX, float spinY);

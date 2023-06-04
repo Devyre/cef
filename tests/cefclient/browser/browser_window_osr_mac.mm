@@ -1323,8 +1323,7 @@ class BrowserWindowOsrMacImpl {
   void OnAcceleratedPaint(CefRefPtr<CefBrowser> browser,
                           CefRenderHandler::PaintElementType type,
                           const CefRenderHandler::RectList& dirtyRects,
-                          void* share_handle,
-                          bool surface_was_updated);
+                          void* share_handle);
   void OnCursorChange(CefRefPtr<CefBrowser> browser,
                       CefCursorHandle cursor,
                       cef_cursor_type_t type,
@@ -1664,8 +1663,7 @@ void BrowserWindowOsrMacImpl::OnAcceleratedPaint(
     CefRefPtr<CefBrowser> browser,
     CefRenderHandler::PaintElementType type,
     const CefRenderHandler::RectList& dirtyRects,
-    void* share_handle,
-    bool surface_was_updated) {
+    void* share_handle) {
   CEF_REQUIRE_UI_THREAD();
   REQUIRE_MAIN_THREAD();
 
@@ -1673,13 +1671,13 @@ void BrowserWindowOsrMacImpl::OnAcceleratedPaint(
     return;
 
   if (painting_popup_) {
-    renderer_.OnAcceleratedPaint(browser, type, dirtyRects, share_handle, surface_was_updated);
+    renderer_.OnAcceleratedPaint(browser, type, dirtyRects, share_handle);
     return;
   }
 
   ScopedGLContext scoped_gl_context(native_browser_view_, true);
 
-  renderer_.OnAcceleratedPaint(browser, type, dirtyRects, share_handle, surface_was_updated);
+  renderer_.OnAcceleratedPaint(browser, type, dirtyRects, share_handle);
   if (type == PET_VIEW && !renderer_.popup_rect().IsEmpty()) {
     painting_popup_ = true;
     browser->GetHost()->Invalidate(PET_POPUP);
@@ -1916,9 +1914,8 @@ void BrowserWindowOsrMac::OnAcceleratedPaint(
     CefRefPtr<CefBrowser> browser,
     CefRenderHandler::PaintElementType type,
     const CefRenderHandler::RectList& dirtyRects,
-    void* share_handle,
-    bool surface_was_updated) {
-  impl_->OnAcceleratedPaint(browser, type, dirtyRects, share_handle, surface_was_updated);
+    void* share_handle) {
+  impl_->OnAcceleratedPaint(browser, type, dirtyRects, share_handle);
 }
 
 void BrowserWindowOsrMac::OnCursorChange(
