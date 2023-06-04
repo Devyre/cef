@@ -56,7 +56,8 @@ class CefRenderHandlerCToCpp
   void OnAcceleratedPaint(CefRefPtr<CefBrowser> browser,
                           PaintElementType type,
                           const RectList& dirtyRects,
-                          void* shared_handle) override;
+                          void* shared_handle,
+                          bool surface_was_updated) override;
   bool StartDragging(CefRefPtr<CefBrowser> browser,
                      CefRefPtr<CefDragData> drag_data,
                      DragOperationsMask allowed_ops,

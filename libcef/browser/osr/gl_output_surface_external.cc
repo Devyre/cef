@@ -151,11 +151,11 @@ void GLOutputSurfaceExternal::EnsureBackbuffer() {
   if (size_.IsEmpty())
     return;
 
-  if (!available_surfaces_.empty()) {
-    current_surface_ = std::move(available_surfaces_.back());
-    available_surfaces_.pop_back();
-    return;
-  }
+  //if (!available_surfaces_.empty()) {
+  //  current_surface_ = std::move(available_surfaces_.back());
+  //  available_surfaces_.pop_back();
+  //  return;
+  //}
 
   gpu::gles2::GLES2Interface* gl = context_provider_->ContextGL();
 
@@ -169,18 +169,21 @@ void GLOutputSurfaceExternal::EnsureBackbuffer() {
   current_surface_->Create(texture_size, color_space_,
                            gpu_memory_buffer_manager_);
 
+  surface_was_updated_ = true;
+
   if (!fbo_) {
     gl->GenFramebuffers(1, &fbo_);
   }
 }
 
 void GLOutputSurfaceExternal::DiscardBackbuffer() {
-  displayed_surface_.reset();
-  displaying_surface_.reset();
+  //displayed_surface_.reset();
+  //displaying_surface_.reset();
+  //current_surface_.reset();
+  //for (auto& surface : in_flight_surfaces_)
+  //  surface = nullptr;
+  //available_surfaces_.clear();
   current_surface_.reset();
-  for (auto& surface : in_flight_surfaces_)
-    surface = nullptr;
-  available_surfaces_.clear();
 
   gpu::gles2::GLES2Interface* gl = context_provider_->ContextGL();
 
@@ -234,16 +237,22 @@ void GLOutputSurfaceExternal::SwapBuffers(OutputSurfaceFrame frame) {
 
 void GLOutputSurfaceExternal::OnSyncWaitComplete(
     std::vector<ui::LatencyInfo> latency_info) {
-  gfx::GpuMemoryBufferHandle handle = current_surface_->GetHandle();
+  //gfx::GpuMemoryBufferHandle handle = current_surface_->GetHandle();
+  //
+  //in_flight_surfaces_.push_back(std::move(current_surface_));
 
-  in_flight_surfaces_.push_back(std::move(current_surface_));
+  if (current_surface_) {
+    gfx::GpuMemoryBufferHandle handle;
+    if (surface_was_updated_)
+      handle = current_surface_->GetHandle();
 
-  if (handle.type != gfx::GpuMemoryBufferType::EMPTY_BUFFER) {
     external_renderer_updater_->OnAfterFlip(
-        std::move(handle), gfx::Rect(size_),
+        std::move(handle), surface_was_updated_, gfx::Rect(size_),
         base::BindOnce(&GLOutputSurfaceExternal::OnAfterSwap,
                        weak_ptr_factory_.GetWeakPtr(),
                        std::move(latency_info)));
+
+	surface_was_updated_ = false;
   } else {
     OnAfterSwap(latency_info);
   }
@@ -251,16 +260,16 @@ void GLOutputSurfaceExternal::OnSyncWaitComplete(
 
 void GLOutputSurfaceExternal::OnAfterSwap(
     std::vector<ui::LatencyInfo> latency_info) {
-  if (in_flight_surfaces_.front()) {
-    if (displayed_surface_) {
-      available_surfaces_.push_back(std::move(displayed_surface_));
-    }
-    if (displaying_surface_) {
-      displayed_surface_ = std::move(displaying_surface_);
-    }
-    displaying_surface_ = std::move(in_flight_surfaces_.front());
-  }
-  in_flight_surfaces_.pop_front();
+  //if (in_flight_surfaces_.front()) {
+  //  if (displayed_surface_) {
+  //    available_surfaces_.push_back(std::move(displayed_surface_));
+  //  }
+  //  if (displaying_surface_) {
+  //    displayed_surface_ = std::move(displaying_surface_);
+  //  }
+  //  displaying_surface_ = std::move(in_flight_surfaces_.front());
+  //}
+  //in_flight_surfaces_.pop_front();
 
   latency_tracker()->OnGpuSwapBuffersCompleted(latency_info);
   // Swap timings are not available since for offscreen there is no Swap, just a

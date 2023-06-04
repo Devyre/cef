@@ -75,7 +75,8 @@ class BrowserWindowOsrMac : public BrowserWindow,
   void OnAcceleratedPaint(CefRefPtr<CefBrowser> browser,
                           CefRenderHandler::PaintElementType type,
                           const CefRenderHandler::RectList& dirtyRects,
-                          void* share_handle) override;
+                          void* share_handle,
+                          bool surface_was_updated) override;
   void OnCursorChange(CefRefPtr<CefBrowser> browser,
                       CefCursorHandle cursor,
                       cef_cursor_type_t type,

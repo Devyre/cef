@@ -1486,8 +1486,9 @@ void CefRenderWidgetHostViewOSR::OnPaint(const gfx::Rect& damage_rect,
 
 void CefRenderWidgetHostViewOSR::OnAcceleratedPaint(
     const gfx::Rect& damage_rect,
-    void* shared_texture) {
-  if (!shared_texture || !use_shared_texture_) {
+    void* shared_texture,
+	bool surface_was_updated) {
+  if (!use_shared_texture_) {
     return;
   }
 
@@ -1504,7 +1505,7 @@ void CefRenderWidgetHostViewOSR::OnAcceleratedPaint(
 
   handler->OnAcceleratedPaint(browser_impl_.get(),
                               IsPopupWidget() ? PET_POPUP : PET_VIEW, rcList,
-                              shared_texture);
+                              shared_texture, surface_was_updated);
 
   // Release the resize hold when we reach the desired size. The damage rect is
   // currently always equal to the full texture size.

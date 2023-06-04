@@ -178,7 +178,8 @@ typedef struct _cef_render_handler_t {
                                            cef_paint_element_type_t type,
                                            size_t dirtyRectsCount,
                                            cef_rect_t const* dirtyRects,
-                                           void* shared_handle);
+                                           void* shared_handle,
+										   bool surface_was_updated);
 
   ///
   // Called when the user starts dragging content in the web view. Contextual
