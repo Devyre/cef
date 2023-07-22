@@ -155,7 +155,7 @@ void CefBrowserPlatformDelegate::SendKeyEvent(const CefKeyEvent& event) {
   NOTIMPLEMENTED();
 }
 
-void CefBrowserPlatformDelegate::SendKeyEvent(const ui::PlatformEvent& event) {
+void CefBrowserPlatformDelegate::SendKeyEvent(const CefPlatformEvent& event) {
   NOTIMPLEMENTED();
 }
 
@@ -168,7 +168,7 @@ void CefBrowserPlatformDelegate::SendMouseClickEvent(
 }
 
 void CefBrowserPlatformDelegate::SendMouseClickEvent(
-    const ui::PlatformEvent& event) {
+    const CefPlatformEvent& event) {
   NOTIMPLEMENTED();
 }
 
@@ -178,7 +178,7 @@ void CefBrowserPlatformDelegate::SendMouseMoveEvent(const CefMouseEvent& event,
 }
 
 void CefBrowserPlatformDelegate::SendMouseMoveEvent(
-    const ui::PlatformEvent& event) {
+    const CefPlatformEvent& event) {
   NOTIMPLEMENTED();
 }
 
@@ -189,7 +189,7 @@ void CefBrowserPlatformDelegate::SendMouseWheelEvent(const CefMouseEvent& event,
 }
 
 void CefBrowserPlatformDelegate::SendMouseWheelEvent(
-    const ui::PlatformEvent& event) {
+    const CefPlatformEvent& event) {
   NOTIMPLEMENTED();
 }
 

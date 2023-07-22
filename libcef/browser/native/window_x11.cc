@@ -323,12 +323,12 @@ views::DesktopWindowTreeHostLinux* CefWindowX11::GetHost() {
   return nullptr;
 }
 
-bool CefWindowX11::CanDispatchEvent(const ui::PlatformEvent& event) {
+bool CefWindowX11::CanDispatchEvent(const CefPlatformEvent& event) {
   auto* dispatching_event = connection_->dispatching_event();
   return dispatching_event && dispatching_event->window() == xwindow_;
 }
 
-uint32_t CefWindowX11::DispatchEvent(const ui::PlatformEvent& event) {
+uint32_t CefWindowX11::DispatchEvent(const CefPlatformEvent& event) {
   DCHECK_NE(xwindow_, x11::Window::None);
   DCHECK(event);
 

@@ -10,6 +10,7 @@
 #endif
 
 #include "include/base/cef_build.h"
+#include "include/base/cef_platform_types_def.h"
 #include "tests/cefclient/browser/main_context.h"
 #include "tests/cefclient/browser/osr_accessibility_helper.h"
 #include "tests/cefclient/browser/osr_accessibility_node.h"
@@ -634,7 +635,7 @@ void OsrWindowWin::OnMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) {
       ::SetFocus(hwnd_);
 
 	  if (browser_host) {
-        ui::PlatformEvent event;
+        CefPlatformEvent event;
         event.hwnd = hwnd_;
         event.message = message;
         event.lParam = MAKELPARAM(x, y);
@@ -688,7 +689,7 @@ void OsrWindowWin::OnMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) {
         ReleaseCapture();
 
 	  if (browser_host) {
-        ui::PlatformEvent event;
+        CefPlatformEvent event;
         event.hwnd = hwnd_;
         event.message = message;
         event.lParam = MAKELPARAM(x, y);
@@ -729,7 +730,7 @@ void OsrWindowWin::OnMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) {
 
     case WM_MOUSEMOVE: {
 	  if (browser_host) {
-        ui::PlatformEvent event;
+        CefPlatformEvent event;
         event.hwnd = hwnd_;
         event.message = message;
         event.lParam = MAKELPARAM(x, y);
@@ -787,7 +788,7 @@ void OsrWindowWin::OnMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) {
       }
 
       if (browser_host) {
-        ui::PlatformEvent event;
+        CefPlatformEvent event;
         event.hwnd = hwnd_;
         event.message = message;
         event.lParam = MAKELPARAM(x, y);
@@ -801,7 +802,7 @@ void OsrWindowWin::OnMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) {
 
     case WM_MOUSEWHEEL:
       if (browser_host) {
-        ui::PlatformEvent event;
+        CefPlatformEvent event;
         event.hwnd = hwnd_;
         event.message = message;
         event.lParam = MAKELPARAM(x, y);

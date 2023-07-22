@@ -29,7 +29,7 @@ class CefBrowserHostBase;
 
 // Object wrapper for an X11 Window.
 // Based on WindowTreeHostX11 and DesktopWindowTreeHostX11.
-class CefWindowX11 : public ui::PlatformEventDispatcher,
+class CefWindowX11 : public CefPlatformEventDispatcher,
                      public x11::EventObserver {
  public:
   CefWindowX11(CefRefPtr<CefBrowserHostBase> browser,
@@ -55,9 +55,9 @@ class CefWindowX11 : public ui::PlatformEventDispatcher,
 
   views::DesktopWindowTreeHostLinux* GetHost();
 
-  // ui::PlatformEventDispatcher methods:
-  bool CanDispatchEvent(const ui::PlatformEvent& event) override;
-  uint32_t DispatchEvent(const ui::PlatformEvent& event) override;
+  // CefPlatformEventDispatcher methods:
+  bool CanDispatchEvent(const CefPlatformEvent& event) override;
+  uint32_t DispatchEvent(const CefPlatformEvent& event) override;
 
   // x11::EventObserver methods:
   void OnEvent(const x11::Event& event) override;

@@ -91,18 +91,18 @@ class CefBrowserHostCToCpp : public CefCToCppRefCounted<CefBrowserHostCToCpp,
   void Invalidate(PaintElementType type) override;
   void SendExternalBeginFrame() override;
   void SendKeyEvent(const CefKeyEvent& event) override;
-  void SendKeyEvent(const ui::PlatformEvent& event) override;
+  void SendKeyEvent(const CefPlatformEvent& event) override;
   void SendMouseClickEvent(const CefMouseEvent& event,
                            MouseButtonType type,
                            bool mouseUp,
                            int clickCount) override;
-  void SendMouseClickEvent(const ui::PlatformEvent& event) override;
+  void SendMouseClickEvent(const CefPlatformEvent& event) override;
   void SendMouseMoveEvent(const CefMouseEvent& event, bool mouseLeave) override;
-  void SendMouseMoveEvent(const ui::PlatformEvent& event) override;
+  void SendMouseMoveEvent(const CefPlatformEvent& event) override;
   void SendMouseWheelEvent(const CefMouseEvent& event,
                            int deltaX,
                            int deltaY) override;
-  void SendMouseWheelEvent(const ui::PlatformEvent& event) override;
+  void SendMouseWheelEvent(const CefPlatformEvent& event) override;
   void SendTouchEvent(const CefTouchEvent& event) override;
   void SendCaptureLostEvent() override;
   void NotifyMoveOrResizeStarted() override;

@@ -483,9 +483,9 @@ void CefBrowserHostBase::SendKeyEvent(const CefKeyEvent& event) {
     platform_delegate_->SendKeyEvent(event);
 }
 
-void CefBrowserHostBase::SendKeyEvent(const ui::PlatformEvent& event) {
+void CefBrowserHostBase::SendKeyEvent(const CefPlatformEvent& event) {
   if (!CEF_CURRENTLY_ON_UIT()) {
-    using TFunction = void (CefBrowserHostBase::*)(const ui::PlatformEvent& event);
+    using TFunction = void (CefBrowserHostBase::*)(const CefPlatformEvent& event);
     CEF_POST_TASK(CEF_UIT, base::BindOnce(TFunction(&CefBrowserHostBase::SendKeyEvent), this, event));
     return;
   }
@@ -509,9 +509,9 @@ void CefBrowserHostBase::SendMouseClickEvent(const CefMouseEvent& event,
   }
 }
 
-void CefBrowserHostBase::SendMouseClickEvent(const ui::PlatformEvent& event) {
+void CefBrowserHostBase::SendMouseClickEvent(const CefPlatformEvent& event) {
   if (!CEF_CURRENTLY_ON_UIT()) {
-    using TFunction = void (CefBrowserHostBase::*)(const ui::PlatformEvent& event);
+    using TFunction = void (CefBrowserHostBase::*)(const CefPlatformEvent& event);
     CEF_POST_TASK(CEF_UIT, base::BindOnce(TFunction(&CefBrowserHostBase::SendMouseClickEvent), this, event));
     return;
   }
@@ -534,9 +534,9 @@ void CefBrowserHostBase::SendMouseMoveEvent(const CefMouseEvent& event,
   }
 }
 
-void CefBrowserHostBase::SendMouseMoveEvent(const ui::PlatformEvent& event) {
+void CefBrowserHostBase::SendMouseMoveEvent(const CefPlatformEvent& event) {
   if (!CEF_CURRENTLY_ON_UIT()) {
-	using TFunction = void(CefBrowserHostBase::*)(const ui::PlatformEvent& event);
+	using TFunction = void(CefBrowserHostBase::*)(const CefPlatformEvent& event);
     CEF_POST_TASK(CEF_UIT, base::BindOnce(TFunction(&CefBrowserHostBase::SendMouseMoveEvent), this, event));
     return;
   }
@@ -565,9 +565,9 @@ void CefBrowserHostBase::SendMouseWheelEvent(const CefMouseEvent& event,
   }
 }
 
-void CefBrowserHostBase::SendMouseWheelEvent(const ui::PlatformEvent& event) {
+void CefBrowserHostBase::SendMouseWheelEvent(const CefPlatformEvent& event) {
   if (!CEF_CURRENTLY_ON_UIT()) {
-	using TFunction = void(CefBrowserHostBase::*)(const ui::PlatformEvent& event);
+	using TFunction = void(CefBrowserHostBase::*)(const CefPlatformEvent& event);
     CEF_POST_TASK(CEF_UIT, base::BindOnce(TFunction(&CefBrowserHostBase::SendMouseWheelEvent), this, event));
     return;
   }

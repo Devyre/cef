@@ -48,7 +48,6 @@
 #include "include/capi/cef_navigation_entry_capi.h"
 #include "include/capi/cef_registration_capi.h"
 #include "include/capi/cef_request_context_capi.h"
-#include "include/cef_ui_platform_types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -640,7 +639,7 @@ typedef struct _cef_browser_host_t {
   // Implemented by Devyre.
   ///
   void(CEF_CALLBACK* send_key_event_native)(struct _cef_browser_host_t* self,
-                                     const ui::PlatformEvent& event);
+                                     const struct _cef_platform_event_t* event);
 
   ///
   // Send a mouse click event to the browser. The |x| and |y| coordinates are
@@ -660,7 +659,7 @@ typedef struct _cef_browser_host_t {
   ///
   void(CEF_CALLBACK* send_mouse_click_event_native)(
       struct _cef_browser_host_t* self,
-      const ui::PlatformEvent& event);
+      const struct _cef_platform_event_t* event);
 
   ///
   // Send a mouse move event to the browser. The |x| and |y| coordinates are
@@ -678,7 +677,7 @@ typedef struct _cef_browser_host_t {
   ///
   void(CEF_CALLBACK* send_mouse_move_event_native)(
       struct _cef_browser_host_t* self,
-      const ui::PlatformEvent& event);
+      const struct _cef_platform_event_t* event);
 
   ///
   // Send a mouse wheel event to the browser. The |x| and |y| coordinates are
@@ -702,7 +701,7 @@ typedef struct _cef_browser_host_t {
   ///
   void(CEF_CALLBACK* send_mouse_wheel_event_native)(
       struct _cef_browser_host_t* self,
-      const ui::PlatformEvent& event);
+      const struct _cef_platform_event_t* event);
 
   ///
   // Send a touch event to the browser for a windowless browser.

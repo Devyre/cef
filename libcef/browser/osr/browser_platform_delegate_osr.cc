@@ -119,7 +119,7 @@ void CefBrowserPlatformDelegateOsr::SendKeyEvent(const CefKeyEvent& event) {
 }
 
 void CefBrowserPlatformDelegateOsr::SendKeyEvent(
-    const ui::PlatformEvent& event) {
+    const CefPlatformEvent& event) {
   CefRenderWidgetHostViewOSR* view = GetOSRHostView();
   if (!view)
     return;
@@ -144,7 +144,7 @@ void CefBrowserPlatformDelegateOsr::SendMouseClickEvent(
 }
 
 void CefBrowserPlatformDelegateOsr::SendMouseClickEvent(
-    const ui::PlatformEvent& event) {
+    const CefPlatformEvent& event) {
   CefRenderWidgetHostViewOSR* view = GetOSRHostView();
   if (!view)
     return;
@@ -167,7 +167,7 @@ void CefBrowserPlatformDelegateOsr::SendMouseMoveEvent(
 }
 
 void CefBrowserPlatformDelegateOsr::SendMouseMoveEvent(
-    const ui::PlatformEvent& event) {
+    const CefPlatformEvent& event) {
   CefRenderWidgetHostViewOSR* view = GetOSRHostView();
   if (!view)
     return;
@@ -191,7 +191,7 @@ void CefBrowserPlatformDelegateOsr::SendMouseWheelEvent(
 }
 
 void CefBrowserPlatformDelegateOsr::SendMouseWheelEvent(
-    const ui::PlatformEvent& event) {
+    const CefPlatformEvent& event) {
   CefRenderWidgetHostViewOSR* view = GetOSRHostView();
   if (!view)
     return;
