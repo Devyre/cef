@@ -793,14 +793,12 @@ browser_host_send_key_event_native(struct _cef_browser_host_t* self,
                                    const struct _cef_platform_event_t* event) {
   shutdown_checker::AssertNotShutdown();
 
-  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
-
   DCHECK(self);
   if (!self)
     return;
   
   // Execute
-  NOTREACHED();
+  CefBrowserHostCppToC::Get(self)->SendKeyEvent((const CefPlatformEvent&) *event);
 }
 
 void CEF_CALLBACK
@@ -840,14 +838,12 @@ browser_host_send_mouse_click_event_native(struct _cef_browser_host_t* self,
                                     const struct _cef_platform_event_t* event) {
   shutdown_checker::AssertNotShutdown();
 
-  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
-
   DCHECK(self);
   if (!self)
     return;
 
   // Execute
-  NOTREACHED();
+  CefBrowserHostCppToC::Get(self)->SendMouseClickEvent((const CefPlatformEvent&) *event);
 }
 
 void CEF_CALLBACK
@@ -885,14 +881,12 @@ browser_host_send_mouse_move_event_native(struct _cef_browser_host_t* self,
                                    const struct _cef_platform_event_t* event) {
   shutdown_checker::AssertNotShutdown();
 
-  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
-
   DCHECK(self);
   if (!self)
     return;
   
   // Execute
-  NOTREACHED();
+  CefBrowserHostCppToC::Get(self)->SendMouseMoveEvent((const CefPlatformEvent&) *event);
 }
 
 void CEF_CALLBACK
@@ -931,14 +925,12 @@ browser_host_send_mouse_wheel_event_native(struct _cef_browser_host_t* self,
                                     const struct _cef_platform_event_t* event) {
   shutdown_checker::AssertNotShutdown();
 
-  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
-
   DCHECK(self);
   if (!self)
     return;
   
   // Execute
-  NOTREACHED();
+  CefBrowserHostCppToC::Get(self)->SendMouseWheelEvent((const CefPlatformEvent&) *event);
 }
 
 void CEF_CALLBACK
